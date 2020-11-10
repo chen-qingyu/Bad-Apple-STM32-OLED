@@ -11,8 +11,8 @@
 #define OLED_CS  PDout(3)  // 片选（低电平有效）
 #define OLED_RST PDout(4)  // 复位（低电平有效）
 #define OLED_DC  PDout(5)  // 数据/命令
-#define OLED_SCL PDout(6)  // CLK时钟
-#define OLED_SDA PDout(7)  // MOSI数据
+#define OLED_SCL PDout(6)  // CLK时钟（D0）
+#define OLED_SDA PDout(7)  // MOSI数据（D1）
 
 #define OLED_RCC     RCC_APB2Periph_GPIOD
 #define OLED_PORT    GPIOD

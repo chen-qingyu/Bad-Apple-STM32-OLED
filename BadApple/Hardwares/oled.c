@@ -35,7 +35,7 @@ void OLED_Init(void)
     OLED_WriteByte(0x20, OLED_CMD); // 设置内存地址模式
     OLED_WriteByte(0x02, OLED_CMD); // [1:0]
     OLED_WriteByte(0xA1, OLED_CMD); // 设置段重定义
-    OLED_WriteByte(0xC8, OLED_CMD); // 设置COM扫描方向(0xC8/0xC0上下翻转！)
+    OLED_WriteByte(0xC0, OLED_CMD); // 设置COM扫描方向(0xC8/0xC0上下翻转！)
     OLED_WriteByte(0xDA, OLED_CMD); // 设置COM硬件引脚
     OLED_WriteByte(0x12, OLED_CMD); // [5:4]
     OLED_WriteByte(0x81, OLED_CMD); // 设置对比度
@@ -250,7 +250,7 @@ void OLED_Reverse(void)
     OLED_WriteByte(0x20, OLED_CMD); // 设置内存地址模式
     OLED_WriteByte(0x02, OLED_CMD); // [1:0]
     OLED_WriteByte(0xA1, OLED_CMD); // 设置段重定义
-    OLED_WriteByte(0xC0, OLED_CMD); // 设置COM扫描方向(0xC8/0xC0上下翻转！)
+    OLED_WriteByte(0xC8, OLED_CMD); // 设置COM扫描方向(0xC8/0xC0上下翻转！)
     OLED_WriteByte(0xDA, OLED_CMD); // 设置COM硬件引脚
     OLED_WriteByte(0x12, OLED_CMD); // [5:4]
     OLED_WriteByte(0x81, OLED_CMD); // 设置对比度

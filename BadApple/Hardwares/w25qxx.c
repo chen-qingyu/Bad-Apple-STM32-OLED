@@ -51,9 +51,13 @@ static void W25QXX_Write_NoCheck(u8 *buffer, u32 addr, u16 len)
 
             len -= remainder; //减去已经写入了的字节数
             if (len > 256)
-                remainder = 256; //一次可以写入256个字节
+            {
+                remainder = 256;
+            } //一次可以写入256个字节
             else
-                remainder = len; //不够256个字节了
+            {
+                remainder = len;
+            } //不够256个字节了
         }
     }
 }
@@ -61,7 +65,7 @@ static void W25QXX_Write_NoCheck(u8 *buffer, u32 addr, u16 len)
 void W25QXX_Init(void)
 {
     SPI2_Init();
-    
+
     W25QXX_TYPE = W25QXX_ReadType(); // 读取芯片型号
 }
 
@@ -131,7 +135,6 @@ u16 W25QXX_ReadType(void)
 // len: 要读取的字节数(最大65535)
 void W25QXX_Read(u8 *buffer, u32 addr, u16 len)
 {
-    printf("W25QXX: READ ADDR %d.\r\n", addr); // 用于打印文件地址
     W25QXX_CS = 0;
     SPI2_ReadWriteByte(W25X_ReadData);
     SPI2_ReadWriteByte((u8)((addr) >> 16));
@@ -168,10 +171,12 @@ void W25QXX_Write(u8 *buffer, u32 addr, u16 len)
     while (1)
     {
         W25QXX_Read(databuf, secpos * 4096, 4096); // 读出整个扇区的内容
-        for (i = 0; i < secremain; i++)               // 校验数据
+        for (i = 0; i < secremain; i++)            // 校验数据
         {
             if (databuf[secoff + i] != 0XFF)
-                break; // 需要擦除
+            {
+                break;
+            } // 需要擦除
         }
         if (i < secremain) // 需要擦除
         {
@@ -199,9 +204,13 @@ void W25QXX_Write(u8 *buffer, u32 addr, u16 len)
             addr += secremain;   // 写地址偏移
             len -= secremain;    // 字节数递减
             if (len > 4096)
-                secremain = 4096; // 下一个扇区还是写不完
+            {
+                secremain = 4096;
+            } // 下一个扇区还是写不完
             else
-                secremain = len; // 下一个扇区可以写完了
+            {
+                secremain = len;
+            } // 下一个扇区可以写完了
         }
     }
 }

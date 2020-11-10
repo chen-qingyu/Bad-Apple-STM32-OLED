@@ -4,21 +4,21 @@ void SPI2_Init(void)
 {
     GPIO_InitTypeDef GPIO_InitStruct;
     SPI_InitTypeDef SPI_InitStruct;
-    
+
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
-    RCC_APB1PeriphClockCmd(RCC_APB1Periph_SPI2, ENABLE);
-    
-    GPIO_InitStruct.GPIO_Pin = GPIO_Pin_12;
+    RCC_APB1PeriphClockCmd(SPI_RCC, ENABLE);
+
+    GPIO_InitStruct.GPIO_Pin = SPI_PIN_CS;
     GPIO_InitStruct.GPIO_Mode = GPIO_Mode_Out_PP;
     GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_Init(GPIOB, &GPIO_InitStruct); // Init CS
-    GPIO_SetBits(GPIOB, GPIO_Pin_12);   // CS片选不选中
-    
-    GPIO_InitStruct.GPIO_Pin = GPIO_Pin_13 | GPIO_Pin_14 | GPIO_Pin_15;
+    GPIO_Init(SPI_PORT, &GPIO_InitStruct); // Init CS
+    GPIO_SetBits(SPI_PORT, SPI_PIN_CS);    // CS片选不选中
+
+    GPIO_InitStruct.GPIO_Pin = SPI_PIN_SCK | SPI_PIN_MISO | SPI_PIN_MOSI;
     GPIO_InitStruct.GPIO_Mode = GPIO_Mode_AF_PP;
     GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_Init(GPIOB, &GPIO_InitStruct); // Init SCK/MISO/MOSI
-    GPIO_SetBits(GPIOB, GPIO_Pin_13 | GPIO_Pin_14 | GPIO_Pin_15);
+    GPIO_Init(SPI_PORT, &GPIO_InitStruct); // Init SCK/MISO/MOSI
+    GPIO_SetBits(SPI_PORT, SPI_PIN_SCK | SPI_PIN_MISO | SPI_PIN_MOSI);
 
     SPI_InitStruct.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_2;
     SPI_InitStruct.SPI_CPHA = SPI_CPHA_2Edge;
